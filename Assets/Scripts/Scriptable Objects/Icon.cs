@@ -1,0 +1,9 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "new Goods Icon", menuName = "Shop/Icon", order = 51)]
+public class Icon : Goods
+{
+	[SerializeField] private Sprite _icon;
+}
