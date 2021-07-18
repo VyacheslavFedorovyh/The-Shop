@@ -15,3 +15,5 @@ The store contains the following offers:
 - Virtual currency (int)
 
 Offers are create as scriptable objects
+
+![Table](https://user-images.githubusercontent.com/40936755/126084953-f05fd356-2c98-4293-ada0-ad884dd95762.gif)
