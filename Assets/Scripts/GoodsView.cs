@@ -15,7 +15,9 @@ public class GoodsView : MonoBehaviour
 	[SerializeField] private GameObject _goodsIconLabel;
 	[SerializeField] private GameObject _goodsIconPicture;
 
-	[SerializeField] Color _colorButton;
+	[SerializeField] private Color _colorButton;
+	[SerializeField] private Color _colorViewEvenNumbers;
+	[SerializeField] private Color _colorViewOddNumbers;
 
 	private Goods _goods;
 
@@ -49,14 +51,14 @@ public class GoodsView : MonoBehaviour
 		if (labelDescription != null)
 		{
 			_goodsLabelDescription.SetActive(true);
-			_goodsLabelDescription.GetComponent<TextView>().ShowView(labelDescription.LabelText, labelDescription.DescriptionText);			
+			_goodsLabelDescription.GetComponent<TextView>().ShowView(labelDescription.LabelText, labelDescription.DescriptionText);
 			return;
 		}
 
 		Icon icon = _goods as Icon;
 		if (icon != null)
 		{
-			_goodsIcon.SetActive(true);			
+			_goodsIcon.SetActive(true);
 			_goodsIcon.GetComponent<IconView>().ShowView(icon.IconSprite);
 			return;
 		}
@@ -85,12 +87,24 @@ public class GoodsView : MonoBehaviour
 			_price.text = goods.Price.ToString() + '$';
 		else if (goods.Price < 0)
 		{
-			ColorBlock cb = _sellButton.colors;
-			cb.normalColor = _colorButton;
-			_sellButton.colors = cb;
-
+			ColorButton();
 			_price.text = goods.Price.ToString() + '$';
 		}
+	}
+
+	private void ColorButton()
+	{
+		ColorBlock cb = _sellButton.colors;
+		cb.normalColor = _colorButton;
+		_sellButton.colors = cb;
+	}
+
+	public void ColorViewEvenNumbers(int number)
+	{
+		if ((number % 2) == 0)
+			GetComponent<Image>().color = _colorViewEvenNumbers;
+		else
+			GetComponent<Image>().color = _colorViewOddNumbers;
 	}
 
 	private void OnButtonClick()

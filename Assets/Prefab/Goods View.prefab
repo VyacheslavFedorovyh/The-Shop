@@ -101,6 +101,8 @@ MonoBehaviour:
   _goodsIconLabel: {fileID: 2560157385546365791}
   _goodsIconPicture: {fileID: 4713391038977036094}
   _colorButton: {r: 0.764151, g: 0.20545568, b: 0.20545568, a: 1}
+  _colorViewEvenNumbers: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  _colorViewOddNumbers: {r: 0.7411765, g: 0.7411765, b: 0.7411765, a: 1}
 --- !u!1 &486993578790393618
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,12 +28,13 @@ public class Shop : MonoBehaviour
 
 	private void AddItem(Goods goods)
 	{
-		var view = Instantiate(_teamlate, _itemContainer.transform);
+		GoodsView view = Instantiate(_teamlate, _itemContainer.transform);
 		view.SellButtonClick += OnSellButtonClick;
 		view.Render(goods);
 
 		_numberGoods++;
 		_goodsViewList.Add(view);
+		view.ColorViewEvenNumbers(_numberGoods);
 		view.Number.text = _numberGoods.ToString();
 	}
 
@@ -58,8 +59,8 @@ public class Shop : MonoBehaviour
 			_message.Transaction();
 			_message.SellButtonClickOk += BuyGoods;
 		}
-		else		
-			_message.NotEnoughMoney();		
+		else
+			_message.NotEnoughMoney();
 	}
 
 	private void BuyGoods()
@@ -75,11 +76,12 @@ public class Shop : MonoBehaviour
 
 	private void ReevaluateNumberGoodsView()
 	{
-		foreach (GoodsView goodsView in _goodsViewList)
+		foreach (GoodsView view in _goodsViewList)
 		{
-			int newNumber = _goodsViewList.IndexOf(goodsView);
+			int newNumber = _goodsViewList.IndexOf(view);
 			newNumber++;
-			goodsView.Number.text = newNumber.ToString();
+			view.ColorViewEvenNumbers(newNumber);
+			view.Number.text = newNumber.ToString();
 		}
 	}
 }
