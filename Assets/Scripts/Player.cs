@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+	[SerializeField] private int _startMoney = 300;
+
 	public int Money { get; private set; }
 
 	public event UnityAction<int> MoneyChanged;
 
 	private void Start()
 	{
-		AddMoney(100);
+		AddMoney(_startMoney);
 	}
 
 	public void AddMoney(int money)
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour
 		MoneyChanged?.Invoke(Money);
 	}
 
-	public void BuyProduct(Goods goods)
+	public void BuyGoods(Goods goods)
 	{
 		Money += goods.Price;
 		MoneyChanged?.Invoke(Money);

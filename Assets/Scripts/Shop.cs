@@ -36,29 +36,33 @@ public class Shop : MonoBehaviour
 
 	private void OnSellButtonClick(Goods goods, GoodsView view)
 	{
-		TrySellProduct(goods, view);
+		TrySellGoods(goods, view);
 	}
 
-	private void TrySellProduct(Goods goods, GoodsView view)
+	private void TrySellGoods(Goods goods, GoodsView view)
 	{
 		if ((_player.Money + goods.Price) >= 0)
 		{
 			// Диалог о покупке
-			_player.BuyProduct(goods);
+			_player.BuyGoods(goods);
 			goods.Buy();
 			view.SellButtonClick -= OnSellButtonClick;
 			_goodsViewList.Remove(view);
-
-			foreach (GoodsView goodsView in _goodsViewList)
-			{
-				int newNumber = _goodsViewList.IndexOf(goodsView);
-				newNumber++;
-				goodsView.Number.text = newNumber.ToString();
-			}
+			ReevaluateNumberGoodsView();
 		}
 		else
 		{
 			// Не хватает денег
+		}
+	}
+
+	private void ReevaluateNumberGoodsView()
+	{
+		foreach (GoodsView goodsView in _goodsViewList)
+		{
+			int newNumber = _goodsViewList.IndexOf(goodsView);
+			newNumber++;
+			goodsView.Number.text = newNumber.ToString();
 		}
 	}
 }
