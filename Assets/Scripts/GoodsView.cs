@@ -24,13 +24,13 @@ public class GoodsView : MonoBehaviour
 	private void OnEnable()
 	{
 		_sellButton.onClick.AddListener(OnButtonClick);
-		_sellButton.onClick.AddListener(TryLockItem);
+		//_sellButton.onClick.AddListener(TryLockItem);
 	}
 
 	private void OnDisable()
 	{
 		_sellButton.onClick.RemoveListener(OnButtonClick);
-		_sellButton.onClick.RemoveListener(TryLockItem);
+		//_sellButton.onClick.RemoveListener(TryLockItem);
 	}
 
 	public void Render(Goods goods)
@@ -95,11 +95,11 @@ public class GoodsView : MonoBehaviour
 		}
 	}
 
-	private void TryLockItem()
-	{
-		if (_goods.IsBuyed)
-			gameObject.SetActive(false);
-	}
+	//private void TryLockItem()
+	//{
+	//	if (_goods.IsBuyed)
+	//		gameObject.SetActive(false);
+	//}
 
 	private void OnButtonClick()
 	{

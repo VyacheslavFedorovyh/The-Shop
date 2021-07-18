@@ -1,13 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
 	[SerializeField] private Player _player;
-	[SerializeField] private List<Goods> _goods;
+	[SerializeField] private List<Goods> _goodsList;
 	[SerializeField] private GoodsView _teamlate;
 	[SerializeField] private GameObject _itemContainer;
+	[SerializeField] private MessagePanel _message;
+
+	private Goods _goods;
+	private GoodsView _view;
 
 	private int _numberGoods;
 	private List<GoodsView> _goodsViewList;
@@ -17,7 +20,7 @@ public class Shop : MonoBehaviour
 		_numberGoods = 0;
 		_goodsViewList = new List<GoodsView>();
 
-		foreach (Goods good in _goods)
+		foreach (Goods good in _goodsList)
 		{
 			AddItem(good);
 		}
@@ -36,24 +39,38 @@ public class Shop : MonoBehaviour
 
 	private void OnSellButtonClick(Goods goods, GoodsView view)
 	{
-		TrySellGoods(goods, view);
+		_goods = goods;
+		_view = view;
+
+		if (_goods.Price >= 0)
+		{
+			BuyGoods();
+			return;
+		}
+
+		TrySellGoods();
 	}
 
-	private void TrySellGoods(Goods goods, GoodsView view)
+	private void TrySellGoods()
 	{
-		if ((_player.Money + goods.Price) >= 0)
+		if ((_player.Money + _goods.Price) >= 0)
 		{
-			// Диалог о покупке
-			_player.BuyGoods(goods);
-			goods.Buy();
-			view.SellButtonClick -= OnSellButtonClick;
-			_goodsViewList.Remove(view);
-			ReevaluateNumberGoodsView();
+			_message.Transaction();
+			_message.SellButtonClickOk += BuyGoods;
 		}
-		else
-		{
-			// Не хватает денег
-		}
+		else		
+			_message.NotEnoughMoney();		
+	}
+
+	private void BuyGoods()
+	{
+		_goods.Buy();
+		_player.BuyGoods(_goods);
+		_goodsViewList.Remove(_view);
+		ReevaluateNumberGoodsView();
+		_view.gameObject.SetActive(false);
+		_view.SellButtonClick -= OnSellButtonClick;
+		_message.SellButtonClickOk -= BuyGoods;
 	}
 
 	private void ReevaluateNumberGoodsView()

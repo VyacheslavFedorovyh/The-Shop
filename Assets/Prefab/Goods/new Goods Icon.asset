@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfc2461d28bcb24fbb45e6ba75824b3, type: 3}
   m_Name: new Goods Icon
   m_EditorClassIdentifier: 
-  _price: 50
-  IsBuyed: 0
+  _price: 0
+  IsBuyed: 1
   _icon: {fileID: 21300000, guid: 2757772c404ee8a438174998e573effc, type: 3}
