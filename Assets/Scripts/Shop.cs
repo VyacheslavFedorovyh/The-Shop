@@ -65,13 +65,16 @@ public class Shop : MonoBehaviour
 
 	private void BuyGoods()
 	{
-		_goods.Buy();
-		_player.BuyGoods(_goods);
-		_goodsViewList.Remove(_view);
-		ReevaluateNumberGoodsView();
-		_view.gameObject.SetActive(false);
-		_view.SellButtonClick -= OnSellButtonClick;
-		_message.SellButtonClickOk -= BuyGoods;
+		if (!_goods.IsBuyed)
+		{
+			_goods.Buy();
+			_player.BuyGoods(_goods);
+			_goodsViewList.Remove(_view);
+			ReevaluateNumberGoodsView();
+			_view.gameObject.SetActive(false);
+			_view.SellButtonClick -= OnSellButtonClick;
+			_message.SellButtonClickOk -= BuyGoods;
+		}
 	}
 
 	private void ReevaluateNumberGoodsView()
