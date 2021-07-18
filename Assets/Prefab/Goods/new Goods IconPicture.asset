@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: new Goods IconPicture
   m_EditorClassIdentifier: 
   _price: 300
+  IsBuyed: 0
   _icon: {fileID: 21300000, guid: 2757772c404ee8a438174998e573effc, type: 3}
   _picture: {fileID: 21300000, guid: 05f6f546a2d73ae448d2fcd056d1bd8d, type: 3}

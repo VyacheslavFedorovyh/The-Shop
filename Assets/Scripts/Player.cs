@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
 	public void BuyProduct(Goods goods)
 	{
-		Money -= goods.Price;
+		Money += goods.Price;
 		MoneyChanged?.Invoke(Money);
 	}
 }
