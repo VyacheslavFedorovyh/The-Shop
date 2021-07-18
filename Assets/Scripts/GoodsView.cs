@@ -15,10 +15,6 @@ public class GoodsView : MonoBehaviour
 	[SerializeField] private GameObject _goodsIconLabel;
 	[SerializeField] private GameObject _goodsIconPicture;
 
-	//[SerializeField] private TMP_Text _label;
-	//[SerializeField] private TMP_Text _description;
-	//[SerializeField] private Image _icon;
-	//[SerializeField] private Image _picture;
 	[SerializeField] Color _colorButton;
 
 	private Goods _goods;
@@ -40,7 +36,7 @@ public class GoodsView : MonoBehaviour
 	public void Render(Goods goods)
 	{
 		_goods = goods;
-
+		_goods.IsBuyed = false;
 		AddPriceButton(_goods);
 
 		Label label = _goods as Label;
@@ -88,14 +84,14 @@ public class GoodsView : MonoBehaviour
 	private void AddPriceButton(Goods goods)
 	{
 		if (goods.Price > 0)
-			_price.text = goods.Price.ToString();
+			_price.text = goods.Price.ToString() + '$';
 		else if (goods.Price < 0)
 		{
 			ColorBlock cb = _sellButton.colors;
 			cb.normalColor = _colorButton;
 			_sellButton.colors = cb;
 
-			_price.text = goods.Price.ToString();
+			_price.text = goods.Price.ToString() + '$';
 		}
 	}
 

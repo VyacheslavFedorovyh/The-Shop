@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
-		AddMoney(30000);
+		AddMoney(100);
 	}
 
 	public void AddMoney(int money)

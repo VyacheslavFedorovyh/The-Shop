@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81916147963550446bf26ca1d469493c, type: 3}
   m_Name: new Goods Label
   m_EditorClassIdentifier: 
-  _price: 100
+  _price: -100
+  IsBuyed: 1
   _label: TestDesc

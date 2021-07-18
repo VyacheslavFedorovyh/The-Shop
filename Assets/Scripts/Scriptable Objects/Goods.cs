@@ -6,7 +6,7 @@ public abstract class Goods : ScriptableObject
 
 	public int Price => _price;
 
-	public bool IsBuyed = false;
+	public bool IsBuyed;
 
 	public void Buy()
 	{

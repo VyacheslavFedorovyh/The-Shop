@@ -9,13 +9,15 @@ public class Shop : MonoBehaviour
 	[SerializeField] private GoodsView _teamlate;
 	[SerializeField] private GameObject _itemContainer;
 
-	private GoodsView[] _goodsView;
+	private int _numberGoods;
+	private List<GoodsView> _goodsViewList;
 
 	private void Start()
-	{		
-		_goodsView = new GoodsView[_goods.Count];
+	{
+		_numberGoods = 0;
+		_goodsViewList = new List<GoodsView>();
 
-		foreach (var good in _goods)
+		foreach (Goods good in _goods)
 		{
 			AddItem(good);
 		}
@@ -26,6 +28,10 @@ public class Shop : MonoBehaviour
 		var view = Instantiate(_teamlate, _itemContainer.transform);
 		view.SellButtonClick += OnSellButtonClick;
 		view.Render(goods);
+
+		_numberGoods++;
+		_goodsViewList.Add(view);
+		view.Number.text = _numberGoods.ToString();
 	}
 
 	private void OnSellButtonClick(Goods goods, GoodsView view)
@@ -35,11 +41,24 @@ public class Shop : MonoBehaviour
 
 	private void TrySellProduct(Goods goods, GoodsView view)
 	{
-		if (goods.Price <= _player.Money)
+		if ((_player.Money + goods.Price) >= 0)
 		{
+			// Диалог о покупке
 			_player.BuyProduct(goods);
-			//goods.Buy(); Скрывать товар
+			goods.Buy();
 			view.SellButtonClick -= OnSellButtonClick;
+			_goodsViewList.Remove(view);
+
+			foreach (GoodsView goodsView in _goodsViewList)
+			{
+				int newNumber = _goodsViewList.IndexOf(goodsView);
+				newNumber++;
+				goodsView.Number.text = newNumber.ToString();
+			}
+		}
+		else
+		{
+			// Не хватает денег
 		}
 	}
 }
